@@ -8,6 +8,8 @@
 
 return {
   -- NOTE: Yes, you can install new plugins here!
+  'theHamsta/nvim-dap-virtual-text',
+  'nvim-telescope/telescope-dap.nvim',
   'mfussenegger/nvim-dap',
   -- NOTE: And you can specify dependencies as well
   dependencies = {

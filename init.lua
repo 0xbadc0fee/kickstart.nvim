@@ -742,7 +742,7 @@ require('lazy').setup({
         json = { 'prettier' },
         yaml = { 'prettier' },
         python = { 'isort', 'black' },
-        markdown = { 'prettier' },
+        -- markdown = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

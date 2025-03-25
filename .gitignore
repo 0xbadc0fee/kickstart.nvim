@@ -2,5 +2,6 @@ tags
 test.sh
 .luarc.json
 nvim
-
+BACKUPinit.lua
+lazy-lock.json
 spell/

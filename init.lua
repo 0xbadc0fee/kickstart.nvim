@@ -519,6 +519,26 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+  -- SGC trying to add org-mode plugin
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' },
+    config = function()
+      -- Setup orgmode
+      require('orgmode').setup {
+        org_agenda_files = '~/orgfiles/**/*',
+        org_default_notes_file = '~/orgfiles/refile.org',
+      }
+
+      -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
+      -- add ~org~ to ignore_install
+      -- require('nvim-treesitter.configs').setup({
+      --   ensure_installed = 'all',
+      --   ignore_install = { 'org' },
+      -- })
+    end,
+  },
   -- SGC trying a border plugin
   -- {
   --   'mikesmithgh/borderline.nvim',
@@ -1042,6 +1062,7 @@ require('lazy').setup({
         'vim',
         'vimdoc',
       },
+      ignore_install = { 'org' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

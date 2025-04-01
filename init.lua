@@ -1061,6 +1061,7 @@ require('lazy').setup({
         'query',
         'vim',
         'vimdoc',
+        'hyprlang',
       },
       ignore_install = { 'org' },
       -- Autoinstall languages that are not installed

@@ -836,7 +836,8 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         cpp = { 'clang-format' },
-        c = { 'uncrustify' },
+        c = { 'clang-format' },
+        -- c = { 'uncrustify' },
         lua = { 'stylua' },
         javascript = { 'prettier' },
         css = { 'prettier' },

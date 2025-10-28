@@ -260,10 +260,16 @@ require('lazy').setup({
     'junegunn/vim-easy-align',
   },
   -- Neogen for generating smart comments
-  {
-    'danymat/neogen',
-    config = true,
-  },
+  -- {
+  --   'danymat/neogen',
+  --   config = true,
+  --   require('neogen').setup {
+  --     languages = {
+  --       ['cpp.doxygen'] = require 'neogen.configurations.cpp',
+  --       ['c.doxygen'] = require 'neogen.configurations.c',
+  --     },
+  --  },
+  --  },
 
   -- Todo-comments for adding tasks within code
   {
@@ -539,19 +545,6 @@ require('lazy').setup({
       -- })
     end,
   },
-  -- SGC trying a border plugin
-  -- {
-  --   'mikesmithgh/borderline.nvim',
-  --   enabled = true,
-  --   lazy = true,
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     require('borderline').setup {
-  --       -- ...
-  --     }
-  --   end,
-  -- },
-  -- LSP Plugins
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
@@ -578,7 +571,6 @@ require('lazy').setup({
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
@@ -777,14 +769,13 @@ require('lazy').setup({
       --    :Mason
       --
       --  You can press `g?` for help in this menu.
-      require('mason').setup()
-
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -839,12 +830,12 @@ require('lazy').setup({
         c = { 'clang-format' },
         -- c = { 'uncrustify' },
         lua = { 'stylua' },
-        javascript = { 'prettier' },
-        css = { 'prettier' },
-        html = { 'prettier' },
-        json = { 'prettier' },
-        yaml = { 'prettier' },
-        python = { 'isort', 'black' },
+        -- javascript = { 'prettier' },
+        -- css = { 'prettier' },
+        -- html = { 'prettier' },
+        -- json = { 'prettier' },
+        -- yaml = { 'prettier' },
+        -- python = { 'isort', 'black' },
         -- markdown = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -883,6 +874,16 @@ require('lazy').setup({
             end,
           },
         },
+        config = function(_, opts)
+          if opts then
+            require('luasnip').config.setup(opts)
+          end
+          vim.tbl_map(function(type)
+            require('luasnip.loaders.from_' .. type).lazy_load()
+          end, { 'vscode', 'snipmate', 'lua' })
+          -- friendly-snippets - enable standardized comments snippets
+          require('luasnip').filetype_extend('typescript', { 'tsdoc' })
+        end,
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -1098,11 +1099,14 @@ require('lazy').setup({
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.oil',
-  -- require 'kickstart.plugins.minifiles',
+  require 'kickstart.plugins.better-escape',
+  -- -- require 'kickstart.plugins.minifiles',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-  -- require 'kickstart.plugins.neogen',
-
+  require 'kickstart.plugins.neogen',
+  require 'kickstart.plugins.virt-column',
+  require 'kickstart.plugins.nvim-web-devicons',
+  require 'kickstart.plugins.fugitiv',
+  -- require 'kickstart.plugins.oil',
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
